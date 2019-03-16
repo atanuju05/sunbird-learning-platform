@@ -23,22 +23,22 @@
 - name: Download the neo4j zip file   
   become: yes
   become_user: "{{learner_user}}"
-  get_url: url=https://sunbirdpublic.blob.core.windows.net/installation/neo4j-enterprise-3.3.9-unix.tar.gz dest={{learner_user_home}} force=no
+  get_url: url=https://sunbird114storagev2.blob.core.windows.net/installation/neo4j-community-3.3.9-unix.tar.gz dest={{learner_user_home}} force=no
 
 - name: Extract archive {{neo4j_zip}}
   become: yes
   become_user: "{{learner_user}}"
   #unarchive: src={{learner_user_home}}/{{neo4j_zip}} dest={{learner_user_home}}/{{neo4j_dir}} copy=no group={{learner_user}} owner={{learner_user}} creates={{ neo4j_home }}
-  shell: tar -xvf neo4j-enterprise-3.3.9-unix.tar.gz
+  shell: tar -xvf neo4j-community-3.3.9-unix.tar.gz
   args:
    chdir: /home/learning
 
 - name: Rename dir
   become: yes
   become_user: "{{learner_user}}"
-  shell: mv /home/learning/neo4j-enterprise-3.3.9 /home/learning/neo4j-learning
+  shell: mv /home/learning/neo4j-community-3.3.9 /home/learning/neo4j-learning
 
-- name: Change Permissions neo4j-enterprise-3.3.9
+- name: Change Permissions neo4j-community-3.3.9
   become: yes
   file: path={{ neo4j_home }} mode=0755 owner={{learner_user}} group={{learner_user}} recurse=yes
 
